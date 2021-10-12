@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1>All Events</h1>
+<div th:replace = "fragments :: navigation"></div>
+<p>Here are the coding events in your area. If you know of others, feel free to add the event to the list.</p>
+
+<th:block th:unless="${events} and ${events.size()}">
+    <hr>
+    <p>There are currently no events. Please add one if you know of any.</p>
+</th:block>
+
+<table th:if="${events} and ${events.size()}" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tr th:each="event : ${events}">
+        <td th:text="${event}">Default list thingy</td>
+    </tr>
+</table>
+
+<a href="/events/create">Click here to add an event</a>
+</body>
+</html>
