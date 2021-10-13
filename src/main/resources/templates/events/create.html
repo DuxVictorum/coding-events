@@ -7,12 +7,17 @@
     <div th:replace = "fragments :: navigation"></div>
     <form method="post" action="/events/create">
         <div class="form-group">
-            <label>Event name
-                <input type="text" name="eventName" placeholder="Name of event" class="form-control"/>
+            <label class="form-label">Event name
+                <input type="text" name="eventName" class="form-control"/>
             </label>
         </div>
         <div class="form-group">
-            <input type="submit" value="Create Event, Fool!" class="btn btn-success"/>
+            <label class="form-label">Description of event
+                <textarea name="eventDesc" rows="3" cols="30" class="form-control">Enter event description</textarea>
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit your event, Fool!" class="btn btn-primary"/>
         </div>
     </form>
 
