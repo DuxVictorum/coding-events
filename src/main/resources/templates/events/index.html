@@ -14,11 +14,15 @@
 <table th:if="${events} and ${events.size()}" class="table table-striped">
     <thead>
     <tr>
+        <th>Event ID</th>
         <th>Name</th>
+        <th>Description</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
-        <td th:text="${event}">Default list thingy</td>
+        <td th:text="${event.uid}">Default ID yo</td>
+        <td th:text="${event.name}">Default list thingy</td>
+        <td th:text="${event.description}">DEfault</td>
     </tr>
 </table>
 
