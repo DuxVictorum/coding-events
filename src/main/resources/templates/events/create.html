@@ -6,7 +6,7 @@
     <h1>Create New Event</h1>
     <div th:replace = "fragments :: navigation"></div>
 
-    <form method="post" action="/events/create">
+    <form method="post" th:action="@{/events/create}">
         <div class="form-group">
             <label>Event name
                 <input type="text" name="name" class="form-control"/>

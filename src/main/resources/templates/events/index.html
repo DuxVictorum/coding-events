@@ -17,16 +17,22 @@
         <th>Event ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Edit Event</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.uid}">Default ID yo</td>
         <td th:text="${event.name}">Default list thingy</td>
-        <td th:text="${event.description}">DEfault</td>
+        <td th:text="${event.description}">Default description</td>
+        <td>
+            <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
+        </td>
     </tr>
 </table>
 
-<div></div><a href="/events/create">Click here to add an event</a></div>
-<div><a href="/events/delete">Click here to delete an event</a></div>
 </body>
 </html>
+
+<!--
+
+-->

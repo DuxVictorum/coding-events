@@ -16,6 +16,10 @@ public class EventController {
 
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
+        if (EventData.getAll().size() == 0) {
+            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders"));
+            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway"));
+        }
         model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
@@ -47,4 +51,20 @@ public class EventController {
         }
         return "redirect:";
     }
+    @GetMapping("edit/{uid}")
+    public String displayEditForm(Model model, @PathVariable int uid) {
+        Event eventToEdit = EventData.getById(uid);
+        model.addAttribute(eventToEdit);
+        model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
+                " (id=" + uid + ")");
+        return "events/edit";
+    }
+    @PostMapping("edit")
+    public String processEditForm(int uid, String name, String description) {
+        Event eventEdited = EventData.getById(uid);
+        eventEdited.setName(name);
+        eventEdited.setDescription(description);
+        return "redirect:";
+    }
+
 }
