@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:color="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
     <h1>Create New Event</h1>
     <div th:replace = "fragments :: navigation"></div>
 
+    <p th:text="${errorMsg}" style="color: tomato">default error message</p>
     <form method="post" th:action="@{/events/create}">
         <div class="form-group">
             <label>Event name
