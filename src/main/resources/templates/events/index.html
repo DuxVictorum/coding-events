@@ -17,6 +17,7 @@
         <th>Event ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Contact Email</th>
         <th>Edit Event</th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@
         <td th:text="${event.uid}">Default ID yo</td>
         <td th:text="${event.name}">Default list thingy</td>
         <td th:text="${event.description}">Default description</td>
+        <td th:text="${event.contactEmail}"></td>
         <td>
             <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
         </td>

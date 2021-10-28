@@ -17,8 +17,8 @@ public class EventController {
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
         if (EventData.getAll().size() == 0) {
-            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders"));
-            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway"));
+            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "ardvark@hotmail.com"));
+            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "babydigz@snuffles.org"));
         }
         model.addAttribute("events", EventData.getAll());
         return "events/index";
@@ -31,9 +31,10 @@ public class EventController {
 
     @PostMapping("create")  // lives at: '/events/create'
     public String handleNewEventForm(@ModelAttribute Event newEvent) {
-        if (!newEvent.getName().equals("")) {
-            EventData.add(newEvent);
-        }
+        EventData.add(newEvent);
+//        if (!newEvent.getName().equals("")) {
+//            EventData.add(newEvent);
+//        }
         return "redirect:";
     }
     @GetMapping("delete")
