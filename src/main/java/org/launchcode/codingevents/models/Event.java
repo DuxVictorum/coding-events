@@ -9,16 +9,18 @@ public class Event {
      * 1) name is 3-50 characters
      * 2) description has 500 char max
      */
-    @NotBlank(message="cannot be blank")
+    @NotBlank(message="must provide event name")
     @Size(min=3, max=50, message="name should be 3-50 characters")
     private String name;
-
     @Size(max=500, message = "500 characters max")
     private String description;
-
-    @NotBlank(message="cannot be blank")
+    @NotBlank(message="must enter description")
     @Email(message="invalid email format")
     private String contactEmail;
+    @NotBlank(message="must enter location")
+    @Size(min=3, max=50, message="location should be 3-50 characters")
+    private String location;
+
     private int uid;
     private static int nextId = 1;
 
@@ -27,10 +29,11 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String location, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
+        this.location = location;
         this.contactEmail = contactEmail;
     }
 
@@ -47,6 +50,8 @@ public class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String newEmail) {
         this.contactEmail = newEmail;
@@ -70,4 +75,5 @@ public class Event {
     public int hashCode() {
         return Objects.hash(getUid());
     }
+
 }

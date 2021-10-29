@@ -19,8 +19,8 @@ public class EventController {
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
         if (EventData.getAll().size() == 0) {
-            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "ardvark@hotmail.com"));
-            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "babydigz@snuffles.org"));
+            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "Chesterfield", "ardvark@hotmail.com"));
+            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "Kirkwood", "babydigz@snuffles.org"));
         }
         model.addAttribute("events", EventData.getAll());
         return "events/index";
@@ -66,10 +66,12 @@ public class EventController {
         return "events/edit";
     }
     @PostMapping("edit")
-    public String processEditForm(int uid, String name, String description) {
+    public String processEditForm(Errors errors, Model model, int uid, String name, String description, String location, String contactEmail) {
         Event eventEdited = EventData.getById(uid);
         eventEdited.setName(name);
         eventEdited.setDescription(description);
+        eventEdited.setLocation(location);
+        eventEdited.setContactEmail(contactEmail);
         return "redirect:";
     }
 
