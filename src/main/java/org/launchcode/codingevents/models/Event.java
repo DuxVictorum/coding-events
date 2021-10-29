@@ -9,24 +9,29 @@ public class Event {
      * 1) name is 3-50 characters
      * 2) description has 500 char max
      */
-    @NotBlank
-    @Size(min=3, max=50, message="Event name must be between 3 and 50 characters")
+    @NotBlank(message="cannot be blank")
+    @Size(min=3, max=50, message="name should be 3-50 characters")
     private String name;
-    @NotBlank
-    @Size(max=500, message = "Must include description, 500 characters max")
+
+    @Size(max=500, message = "500 characters max")
     private String description;
-    @NotBlank
-    @Email(message="Invalid email, try again")
+
+    @NotBlank(message="cannot be blank")
+    @Email(message="invalid email format")
     private String contactEmail;
     private int uid;
     private static int nextId = 1;
 
+    public Event() {
+        this.uid = nextId;
+        nextId++;
+    }
+
     public Event(String name, String description, String contactEmail) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.uid = nextId;
-        nextId++;
     }
 
     //  Getter Setter Salad
