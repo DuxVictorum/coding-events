@@ -27,7 +27,9 @@ public class EventController {
     }
 
     @GetMapping("create")   // lives at: '/events/create'
-    public String renderNewEventForm() {
+    public String renderNewEventForm(Model model) {
+        model.addAttribute("title", "Create Event");
+        model.addAttribute("event", new Event());
         return "events/create";
     }
 
@@ -35,7 +37,6 @@ public class EventController {
     public String handleNewEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("errorMsg", "Failed validation");
             return "events/create";
         }
         EventData.add(newEvent);
