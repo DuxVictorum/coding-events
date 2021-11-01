@@ -5,9 +5,8 @@
 <h1>All Events</h1>
 <div th:replace = "fragments :: navigation"></div>
 <p>Here are the coding events in your area. If you know of others, feel free to add the event to the list.</p>
-
+<hr>
 <th:block th:unless="${events} and ${events.size()}">
-    <hr>
     <p>There are currently no events. Please add one if you know of any.</p>
 </th:block>
 
@@ -19,6 +18,7 @@
         <th>Description</th>
         <th>Location</th>
         <th>Must Register?</th>
+        <th># Attending</th>
         <th>Contact Email</th>
         <th>Edit Event</th>
     </tr>
@@ -29,8 +29,8 @@
         <td th:text="${event.description}">Default description</td>
         <td th:text="${event.location}">Default location</td>
         <td th:text="${event.regRequired}">Default reg</td>
+        <td th:text="${event.numAttend}">Default attend</td>
         <td th:text="${event.contactEmail}"></td>
-        <
         <td>
             <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
         </td>

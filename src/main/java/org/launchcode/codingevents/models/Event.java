@@ -19,6 +19,8 @@ public class Event {
     private String location;
     @AssertTrue(message="registration is required for all events")
     private boolean regRequired;
+    @Positive(message="must be a positive number")
+    private int numAttend;
     @NotBlank(message="must enter description")
     @Email(message="invalid email format")
     private String contactEmail;
@@ -31,12 +33,13 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String location, boolean regRequired, String contactEmail) {
+    public Event(String name, String description, String location, boolean regRequired, int numAttend, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
         this.location = location;
         this.regRequired = regRequired;
+        this.numAttend = numAttend;
         this.contactEmail = contactEmail;
     }
 
@@ -57,6 +60,8 @@ public class Event {
     public void setLocation(String location) { this.location = location; }
     public boolean isRegRequired() { return regRequired; }
     public void setRegRequired(boolean regRequired) { this.regRequired = regRequired; }
+    public int getNumAttend() { return numAttend; }
+    public void setNumAttend(int aNum) { this.numAttend = aNum; }
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String newEmail) {
         this.contactEmail = newEmail;
