@@ -19,8 +19,8 @@ public class EventController {
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
         if (EventData.getAll().size() == 0) {
-            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "Chesterfield", "ardvark@hotmail.com"));
-            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "Kirkwood", "babydigz@snuffles.org"));
+            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "Chesterfield", true, "ardvark@hotmail.com"));
+            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "Kirkwood", true, "babydigz@snuffles.org"));
         }
         model.addAttribute("events", EventData.getAll());
         return "events/index";
@@ -60,18 +60,25 @@ public class EventController {
     @GetMapping("edit/{uid}")
     public String displayEditForm(Model model, @PathVariable int uid) {
         Event eventToEdit = EventData.getById(uid);
-        model.addAttribute(eventToEdit);
+        model.addAttribute("event", eventToEdit);
         model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
                 " (id=" + uid + ")");
         return "events/edit";
     }
     @PostMapping("edit")
-    public String processEditForm(Errors errors, Model model, int uid, String name, String description, String location, String contactEmail) {
+    public String processEditForm(@ModelAttribute @Valid Event eventToEdit, Errors errors, Model model, int uid) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
+                    " (id=" + eventToEdit.getUid() + ")");
+            return "events/edit";
+        }
+        System.out.println(eventToEdit.getName());
         Event eventEdited = EventData.getById(uid);
-        eventEdited.setName(name);
-        eventEdited.setDescription(description);
-        eventEdited.setLocation(location);
-        eventEdited.setContactEmail(contactEmail);
+        eventEdited.setName(eventToEdit.getName());
+        eventEdited.setDescription(eventToEdit.getDescription());
+        eventEdited.setLocation(eventToEdit.getLocation());
+        eventEdited.setRegRequired(eventToEdit.isRegRequired());
+        eventEdited.setContactEmail(eventToEdit.getContactEmail());
         return "redirect:";
     }
 

@@ -14,12 +14,14 @@ public class Event {
     private String name;
     @Size(max=500, message = "500 characters max")
     private String description;
-    @NotBlank(message="must enter description")
-    @Email(message="invalid email format")
-    private String contactEmail;
     @NotBlank(message="must enter location")
     @Size(min=3, max=50, message="location should be 3-50 characters")
     private String location;
+    @AssertTrue(message="registration is required for all events")
+    private boolean regRequired;
+    @NotBlank(message="must enter description")
+    @Email(message="invalid email format")
+    private String contactEmail;
 
     private int uid;
     private static int nextId = 1;
@@ -29,11 +31,12 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String location, String contactEmail) {
+    public Event(String name, String description, String location, boolean regRequired, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
         this.location = location;
+        this.regRequired = regRequired;
         this.contactEmail = contactEmail;
     }
 
@@ -52,6 +55,8 @@ public class Event {
     }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+    public boolean isRegRequired() { return regRequired; }
+    public void setRegRequired(boolean regRequired) { this.regRequired = regRequired; }
     public String getContactEmail() { return contactEmail; }
     public void setContactEmail(String newEmail) {
         this.contactEmail = newEmail;

@@ -8,25 +8,39 @@
 
 <form method="post" th:action="@{/events/edit}">
     <div class="form-group">
-        <input type="hidden" th:value="${event.uid}" name="uid" />
+        <input type="hidden" th:field="${event.uid}" name="uid" />
         <label>Event name
-            <input type="text" name="name" th:value="${event.name}" class="form-control"/>
+            <input type="text" name="name" th:field="${event.name}" class="form-control"/>
         </label>
+        <p class="error" th:errors="${event.name}"></p>
     </div>
     <div class="form-group">
         <label>Event Description
-            <input type="text" name="description" th:value="${event.description}" class="form-control"/>
+            <input type="text" name="description" th:field="${event.description}" class="form-control"/>
         </label>
+        <p class="error" th:errors="${event.description}"></p>
     </div>
     <div class="form-group">
         <label>Location (City)
             <input type="text" th:field="${event.location}" class="form-control"/>
         </label>
+        <p class="error" th:errors="${event.location}"></p>
+    </div>
+    <div>Registration Required?</div>
+    <div class="form-check">
+        <input class="form-check-input" id="radio-yes" type="radio" th:field="${event.regRequired}" value="true" />
+        <label class="form-check-label" for="radio-yes">Yes</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" id="radio-no" type="radio" th:field="${event.regRequired}" value="false" />
+        <label class="form-check-label" for="radio-no">No</label>
+        <p class="error" th:errors="${event.regRequired}"></p>
     </div>
     <div class="form-group">
         <label>Contact Email
-            <input type="text" name="contactEmail" th:value="${event.contactEmail}" class="form-control"/>
+            <input type="text" name="contactEmail" th:field="${event.contactEmail}" class="form-control"/>
         </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
     </div>
     <div class="form-group">
         <input type="submit" value="Edit Event" class="btn btn-primary"/>

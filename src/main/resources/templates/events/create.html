@@ -25,6 +25,16 @@
             </label>
             <p class="error" th:errors="${event.location}"></p>
         </div>
+        <div>Registration Required?</div>
+        <div class="form-check">
+            <input class="form-check-input" id="radio-yes" type="radio" th:field="${event.regRequired}" value="true" />
+            <label class="form-check-label" for="radio-yes">Yes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" id="radio-no" type="radio" th:field="${event.regRequired}" value="false" />
+            <label class="form-check-label" for="radio-no">No</label>
+            <p class="error" th:errors="${event.regRequired}"></p>
+        </div>
         <div class="form-group">
             <label>Contact Email
                 <input type="text" th:field="${event.contactEmail}" class="form-control"/>
@@ -39,3 +49,4 @@
 
 </body>
 </html>
+
