@@ -1,6 +1,9 @@
 package org.launchcode.codingevents.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Event {
@@ -17,6 +20,9 @@ public class Event {
     @NotBlank(message="must enter location")
     @Size(min=3, max=50, message="location should be 3-50 characters")
     private String location;
+    @FutureOrPresent(message="event must not be in the past")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate eventDate;
     @AssertTrue(message="registration is required for all events")
     private boolean regRequired;
     @Positive(message="must be a positive number")
@@ -33,11 +39,12 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String location, boolean regRequired, int numAttend, String contactEmail) {
+    public Event(String name, String description, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
         this.location = location;
+        this.eventDate = eventDate;
         this.regRequired = regRequired;
         this.numAttend = numAttend;
         this.contactEmail = contactEmail;
@@ -58,6 +65,8 @@ public class Event {
     }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+    public LocalDate getEventDate() { return eventDate; }
+    public void setEventDate(LocalDate aDate) { this.eventDate = aDate; }
     public boolean isRegRequired() { return regRequired; }
     public void setRegRequired(boolean regRequired) { this.regRequired = regRequired; }
     public int getNumAttend() { return numAttend; }
@@ -69,6 +78,7 @@ public class Event {
     public int getUid() {
         return this.uid;
     }
+    public void setUid(int newID) { this.uid = newID; }
 
     @Override
     public String toString() {

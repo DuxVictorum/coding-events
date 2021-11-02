@@ -25,6 +25,12 @@
             </label>
             <p class="error" th:errors="${event.location}"></p>
         </div>
+        <div class="form-group">
+            <label>Event Date
+                <input type="date" th:field="${event.eventDate}" class="form-control"/>
+            </label>
+            <p class="error" th:errors="${event.eventDate}"></p>
+        </div>
         <div>Registration Required?</div>
         <div class="form-check">
             <input class="form-check-input" id="radio-yes" type="radio" th:field="${event.regRequired}" value="true" />

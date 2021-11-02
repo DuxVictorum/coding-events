@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,8 +20,8 @@ public class EventController {
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
         if (EventData.getAll().size() == 0) {
-            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "Chesterfield", true, 45, "ardvark@hotmail.com"));
-            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "Kirkwood", true, 89342, "babydigz@snuffles.org"));
+            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", "Chesterfield", LocalDate.parse("2021-11-06"), true, 45, "ardvark@hotmail.com"));
+            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", "Kirkwood", LocalDate.parse("2022-02-25"), true, 89342, "babydigz@snuffles.org"));
         }
         model.addAttribute("events", EventData.getAll());
         return "events/index";
@@ -67,16 +68,18 @@ public class EventController {
     }
     @PostMapping("edit")
     public String processEditForm(@ModelAttribute @Valid Event eventToEdit, Errors errors, Model model, int uid) {
+        System.out.println(uid);
+        eventToEdit.setUid(uid);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
-                    " (id=" + eventToEdit.getUid() + ")");
+                    " (id=" + eventToEdit.getUid() + " / " + uid + ")");
             return "events/edit";
         }
-        System.out.println(eventToEdit.getName());
         Event eventEdited = EventData.getById(uid);
         eventEdited.setName(eventToEdit.getName());
         eventEdited.setDescription(eventToEdit.getDescription());
         eventEdited.setLocation(eventToEdit.getLocation());
+        eventEdited.setEventDate(eventToEdit.getEventDate());
         eventEdited.setRegRequired(eventToEdit.isRegRequired());
         eventEdited.setNumAttend(eventToEdit.getNumAttend());
         eventEdited.setContactEmail(eventToEdit.getContactEmail());
