@@ -68,11 +68,11 @@ public class EventController {
     }
     @PostMapping("edit")
     public String processEditForm(@ModelAttribute @Valid Event eventToEdit, Errors errors, Model model, int uid) {
-        System.out.println(uid);
+//        System.out.println(uid);      -->  Testing for debugging
         eventToEdit.setUid(uid);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
-                    " (id=" + eventToEdit.getUid() + " / " + uid + ")");
+                    " (id=" + eventToEdit.getUid() + ")");
             return "events/edit";
         }
         Event eventEdited = EventData.getById(uid);
