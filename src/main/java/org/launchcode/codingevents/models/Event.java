@@ -31,6 +31,8 @@ public class Event {
     @Email(message="invalid email format")
     private String contactEmail;
 
+    private EventType type;
+
     private int uid;
     private static int nextId = 1;
 
@@ -39,10 +41,11 @@ public class Event {
         nextId++;
     }
 
-    public Event(String name, String description, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
+    public Event(String name, String description, EventType type, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
         this();
         this.name = name;
         this.description = description;
+        this.type = type;
         this.location = location;
         this.eventDate = eventDate;
         this.regRequired = regRequired;
@@ -63,6 +66,8 @@ public class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+    public EventType getType() { return type; }
+    public void setType(EventType type) { this.type = type; }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
     public LocalDate getEventDate() { return eventDate; }
