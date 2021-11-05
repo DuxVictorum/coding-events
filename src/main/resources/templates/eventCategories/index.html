@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1>All Event Categories</h1>
+<div th:replace = "fragments :: navigation"></div>
+<p>Here is a list of event categories. Feel free to create a new category as needed to best describe your event.</p>
+<hr>
+
+<th:block th:unless="${categories}">
+    <p>There are currently no event categories. Add one here before creating a new event.</p>
+</th:block>
+
+<table th:if="${categories}" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.name}">Default list thingy</td>
+    </tr>
+</table>
+
+</body>
+</html>

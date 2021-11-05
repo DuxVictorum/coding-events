@@ -21,6 +21,7 @@ public class Event {
     private String name;
     @Size(max=500, message = "500 characters max")
     private String description;
+    private EventType type;
     @NotBlank(message="must enter location")
     @Size(min=3, max=50, message="location should be 3-50 characters")
     private String location;
@@ -34,7 +35,6 @@ public class Event {
     @NotBlank(message="must enter description")
     @Email(message="invalid email format")
     private String contactEmail;
-    private EventType type;
 
     @Id
     @GeneratedValue
