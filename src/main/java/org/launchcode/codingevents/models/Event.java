@@ -2,10 +2,14 @@ package org.launchcode.codingevents.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
     /* Event validation:
@@ -30,19 +34,15 @@ public class Event {
     @NotBlank(message="must enter description")
     @Email(message="invalid email format")
     private String contactEmail;
-
     private EventType type;
 
+    @Id
+    @GeneratedValue
     private int uid;
-    private static int nextId = 1;
 
-    public Event() {
-        this.uid = nextId;
-        nextId++;
-    }
+    public Event() { }
 
     public Event(String name, String description, EventType type, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
-        this();
         this.name = name;
         this.description = description;
         this.type = type;

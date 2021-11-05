@@ -22,7 +22,7 @@
         <th>Must Register?</th>
         <th># Attending</th>
         <th>Contact Email</th>
-        <th>Edit Event</th>
+        <!-- <th>Edit Event</th>     **Took out Edit function for now -->
     </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -35,9 +35,9 @@
         <td th:text="${event.regRequired}">Default reg</td>
         <td th:text="${event.numAttend}">Default attend</td>
         <td th:text="${event.contactEmail}"></td>
-        <td>
+        <!-- <td>
             <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
-        </td>
+        </td> -->
     </tr>
 </table>
 
