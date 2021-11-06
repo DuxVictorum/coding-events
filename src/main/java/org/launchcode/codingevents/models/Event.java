@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-public class Event {
+public class Event extends AbstractEntity {
 
     /* Event validation:
      * 1) name is 3-50 characters
@@ -36,9 +36,7 @@ public class Event {
     @Email(message="invalid email format")
     private String contactEmail;
 
-    @Id
-    @GeneratedValue
-    private int uid;
+
 
     public Event() { }
 
@@ -80,25 +78,10 @@ public class Event {
     public void setContactEmail(String newEmail) {
         this.contactEmail = newEmail;
     }
-    public int getUid() {
-        return this.uid;
-    }
-    public void setUid(int newID) { this.uid = newID; }
 
     @Override
     public String toString() {
         return this.getName();
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return getUid() == event.getUid();
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUid());
     }
 
 }

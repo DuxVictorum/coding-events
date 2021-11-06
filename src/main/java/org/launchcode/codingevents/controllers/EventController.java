@@ -59,8 +59,8 @@ public class EventController {
     @PostMapping("delete")
     public String handleDeleteEventform(@RequestParam(required = false) int[] eventIds) {
         if (eventIds != null) {
-            for (int uid : eventIds) {
-                eventRepository.deleteById(uid);
+            for (int id : eventIds) {
+                eventRepository.deleteById(id);
             }
         }
         return "redirect:";
@@ -68,25 +68,25 @@ public class EventController {
 
 //    ** Don't bother with Edit functionality right now **
 
-//    @GetMapping("edit/{uid}")
-//    public String displayEditForm(Model model, @PathVariable int uid) {
-//        Event eventToEdit = EventData.getById(uid);
+//    @GetMapping("edit/{id}")
+//    public String displayEditForm(Model model, @PathVariable int id) {
+//        Event eventToEdit = EventData.getById(id);
 //        model.addAttribute("event", eventToEdit);
 //        model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
-//                " (id=" + uid + ")");
+//                " (id=" + id + ")");
 //        model.addAttribute("types", EventType.values());
 //        return "events/edit";
 //    }
 //    @PostMapping("edit")
-//    public String processEditForm(@ModelAttribute @Valid Event eventToEdit, Errors errors, Model model, int uid) {
-////        System.out.println(uid);      -->  Testing for debugging
-//        eventToEdit.setUid(uid);
+//    public String processEditForm(@ModelAttribute @Valid Event eventToEdit, Errors errors, Model model, int id) {
+////        System.out.println(id);      -->  Testing for debugging
+//        eventToEdit.setUid(id);
 //        if (errors.hasErrors()) {
 //            model.addAttribute("title", "Edit Event " + eventToEdit.getName() +
-//                    " (id=" + eventToEdit.getUid() + ")");
+//                    " (id=" + eventToEdit.getId() + ")");
 //            return "events/edit";
 //        }
-//        Event eventEdited = EventData.getById(uid);
+//        Event eventEdited = EventData.getById(id);
 //        eventEdited.setName(eventToEdit.getName());
 //        eventEdited.setDescription(eventToEdit.getDescription());
 //        eventEdited.setType(eventToEdit.getType());
