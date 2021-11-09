@@ -4,7 +4,8 @@
 
 <body class="container">
 <div th:replace = "fragments :: navigation"></div>
-<h2>Delete an event from the list</h2>
+<p>Which events would you like to delete?</p>
+<hr>
 
 <form method="post">  <!-- Will post to same "/delete" page -->
     <div class="form-check" th:each="event : ${events}">

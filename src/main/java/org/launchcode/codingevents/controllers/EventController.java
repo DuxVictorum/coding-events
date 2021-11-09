@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("events")
@@ -23,8 +24,20 @@ public class EventController {
     private EventCategoryRepository eventCategoryRepository;
 
     @GetMapping    // lives at: '/events'
-    public String displayAllEvents(Model model) {
-        model.addAttribute("events", eventRepository.findAll());
+    public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Category ID: " + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Events in category: " + category.getName());
+                model.addAttribute("events", category.getEvents());
+            }
+        }
         return "events/index";
     }
 
@@ -49,7 +62,7 @@ public class EventController {
     }
     @GetMapping("delete")
     public String displayDeleteEventForm(Model model) {
-        model.addAttribute("title", "Delete Events");
+        model.addAttribute("title", "Delete an event from the list");
         model.addAttribute("events", eventRepository.findAll());
         return "events/delete";
     }

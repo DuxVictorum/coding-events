@@ -22,7 +22,7 @@ public class EventCategoryController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Categories");
+        model.addAttribute("title", "All Event Categories");
         model.addAttribute("categories", eventCategoryRepository.findAll());
         return "eventCategories/index";
     }

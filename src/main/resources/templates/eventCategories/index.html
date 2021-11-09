@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1>All Event Categories</h1>
+
 <div th:replace = "fragments :: navigation"></div>
 <p>Here is a list of event categories. Feel free to create a new category as needed to best describe your event.</p>
 <hr>
@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tr th:each="category : ${categories}">
-        <td th:text="${category.name}">Default list thingy</td>
+        <td><a th:text="${category.name}" th:href="'/events?categoryId=' + ${category.id}">Default list thingy</a></td>
     </tr>
 </table>
 
