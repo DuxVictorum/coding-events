@@ -53,8 +53,7 @@ public class EventController {
     public String handleNewEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            System.out.println(newEvent.getEventCategory());
-            model.addAttribute("categories", eventCategoryRepository.findAll());
+
             return "events/create";
         }
         eventRepository.save(newEvent);

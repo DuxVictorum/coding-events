@@ -15,9 +15,9 @@
         </div>
         <div class="form-group">
             <label>Event Description
-                <input type="text" th:field="${event.description}" class="form-control"/>
+                <input type="text" th:field="${event.eventDetails.description}" class="form-control"/>
             </label>
-            <p class="error" th:errors="${event.description}"></p>
+            <p class="error" th:errors="${event.eventDetails.description}"></p>
         </div>
         <div class="form-group">
             <label>Event Category
@@ -29,37 +29,37 @@
         </div>
         <div class="form-group">
             <label>Location (City)
-                <input type="text" th:field="${event.location}" class="form-control"/>
+                <input type="text" th:field="${event.eventDetails.location}" class="form-control"/>
             </label>
-            <p class="error" th:errors="${event.location}"></p>
+            <p class="error" th:errors="${event.eventDetails.location}"></p>
         </div>
         <div class="form-group">
             <label>Event Date
-                <input type="date" th:field="${event.eventDate}" class="form-control"/>
+                <input type="date" th:field="${event.eventDetails.eventDate}" class="form-control"/>
             </label>
-            <p class="error" th:errors="${event.eventDate}"></p>
+            <p class="error" th:errors="${event.eventDetails.eventDate}"></p>
         </div>
         <div>Registration Required?</div>
         <div class="form-check">
-            <input class="form-check-input" id="radio-yes" type="radio" th:field="${event.regRequired}" value="true" />
+            <input class="form-check-input" id="radio-yes" type="radio" th:field="${event.eventDetails.regRequired}" value="true" />
             <label class="form-check-label" for="radio-yes">Yes</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" id="radio-no" type="radio" th:field="${event.regRequired}" value="false" />
+            <input class="form-check-input" id="radio-no" type="radio" th:field="${event.eventDetails.regRequired}" value="false" />
             <label class="form-check-label" for="radio-no">No</label>
-            <p class="error" th:errors="${event.regRequired}"></p>
+            <p class="error" th:errors="${event.eventDetails.regRequired}"></p>
         </div>
         <div class="form-group">
             <label>Number Attending
-                <input type="number" th:field="${event.numAttend}" class="form-control"/>
+                <input type="number" th:field="${event.eventDetails.numAttend}" class="form-control"/>
             </label>
-            <p class="error" th:errors="${event.numAttend}"></p>
+            <p class="error" th:errors="${event.eventDetails.numAttend}"></p>
         </div>
         <div class="form-group">
             <label>Contact Email
-                <input type="email" th:field="${event.contactEmail}" class="form-control"/>
+                <input type="email" th:field="${event.eventDetails.contactEmail}" class="form-control"/>
             </label>
-            <p class="error" th:errors="${event.contactEmail}"></p>
+            <p class="error" th:errors="${event.eventDetails.contactEmail}"></p>
         </div>
         <div class="form-group">
             <input type="submit" value="Create Event, Fool!" class="btn btn-success"/>

@@ -28,13 +28,13 @@
     <tr th:each="event : ${events}">
         <td th:text="${event.id}">Default ID yo</td>
         <td th:text="${event.name}">Default list thingy</td>
-        <td th:text="${event.description}">Default description</td>
+        <td th:text="${event.eventDetails.description}">Default description</td>
         <td th:text="${event.eventCategory}">Default category</td>
-        <td th:text="${event.location}">Default location</td>
-        <td th:text="${event.eventDate}">Default date</td>
-        <td th:text="${event.regRequired}">Default reg</td>
-        <td th:text="${event.numAttend}">Default attend</td>
-        <td th:text="${event.contactEmail}"></td>
+        <td th:text="${event.eventDetails.location}">Default location</td>
+        <td th:text="${event.eventDetails.eventDate}">Default date</td>
+        <td th:text="${event.eventDetails.regRequired}">Default reg</td>
+        <td th:text="${event.eventDetails.numAttend}">Default attend</td>
+        <td th:text="${event.eventDetails.contactEmail}"></td>
         <!-- <td>
             <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
         </td> -->
