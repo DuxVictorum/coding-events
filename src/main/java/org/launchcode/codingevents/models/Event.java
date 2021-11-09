@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -21,14 +22,15 @@ public class Event extends AbstractEntity {
     private String name;
     @Size(max=500, message = "500 characters max")
     private String description;
-    private EventType type;
+    @ManyToOne
+    @NotNull(message="must include a valid category")
+    private EventCategory eventCategory;
     @NotBlank(message="must enter location")
     @Size(min=3, max=50, message="location should be 3-50 characters")
     private String location;
     @FutureOrPresent(message="event must not be in the past")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate eventDate;
-    @AssertTrue(message="registration is required for all events")
     private boolean regRequired;
     @Positive(message="must be a positive number")
     private int numAttend;
@@ -40,10 +42,10 @@ public class Event extends AbstractEntity {
 
     public Event() { }
 
-    public Event(String name, String description, EventType type, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
+    public Event(String name, String description, EventCategory eventCategory, String location, LocalDate eventDate, boolean regRequired, int numAttend, String contactEmail) {
         this.name = name;
         this.description = description;
-        this.type = type;
+        this.eventCategory = eventCategory;
         this.location = location;
         this.eventDate = eventDate;
         this.regRequired = regRequired;
@@ -64,8 +66,8 @@ public class Event extends AbstractEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    public EventType getType() { return type; }
-    public void setType(EventType type) { this.type = type; }
+    public EventCategory getEventCategory() { return eventCategory; }
+    public void setEventCategory(EventCategory eventCategory) { this.eventCategory = eventCategory; }
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
     public LocalDate getEventDate() { return eventDate; }
@@ -83,5 +85,6 @@ public class Event extends AbstractEntity {
     public String toString() {
         return this.getName();
     }
+
 
 }

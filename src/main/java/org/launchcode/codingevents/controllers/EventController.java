@@ -1,8 +1,9 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
-import org.launchcode.codingevents.models.EventType;
+import org.launchcode.codingevents.models.EventCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("events")
@@ -22,13 +19,11 @@ public class EventController {
     @Autowired      // Uses dependency injection; looks for a @Repository class and then "injects" it wherever needed
     private EventRepository eventRepository;
 
+    @Autowired
+    private EventCategoryRepository eventCategoryRepository;
+
     @GetMapping    // lives at: '/events'
     public String displayAllEvents(Model model) {
-//        Below if-block no longer needed since we've linked to a persistent database
-//        if (EventData.getAll().size() == 0) {     **-->Would be eventRepository.count() == 0 <--**
-//            EventData.add(new Event("GatewayCon 3000", "Local gathering of coders", EventType.MEETUP, "Chesterfield", LocalDate.parse("2021-11-06"), true, 45, "ardvark@hotmail.com"));
-//            EventData.add(new Event("SkunkWay Programmers", "Smells nice anyway", EventType.CONFERENCE, "Kirkwood", LocalDate.parse("2022-02-25"), true, 89342, "babydigz@snuffles.org"));
-//        }
         model.addAttribute("events", eventRepository.findAll());
         return "events/index";
     }
@@ -37,7 +32,7 @@ public class EventController {
     public String renderNewEventForm(Model model) {
         model.addAttribute("title", "Create Event");
         model.addAttribute("event", new Event());
-        model.addAttribute("types", EventType.values());
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/create";
     }
 
@@ -45,6 +40,8 @@ public class EventController {
     public String handleNewEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
+            System.out.println(newEvent.getEventCategory());
+            model.addAttribute("categories", eventCategoryRepository.findAll());
             return "events/create";
         }
         eventRepository.save(newEvent);
