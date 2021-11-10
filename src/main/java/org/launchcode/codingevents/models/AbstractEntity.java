@@ -12,8 +12,7 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
-    public AbstractEntity() {
-    }
+    public AbstractEntity() { }
 
     public int getId() { return id; }
     public void setId(int newID) { this.id = newID; }   // Will this even work now that it's managed by ORM?

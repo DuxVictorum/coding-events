@@ -21,6 +21,7 @@ public class EventDetails extends AbstractEntity {
     private boolean regRequired;
     @Positive(message="must be a positive number")
     private int numAttend;
+    @NotBlank(message="must include email")
     @Email(message="invalid email format")
     private String contactEmail;
 

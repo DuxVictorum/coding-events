@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<h1>All Events</h1>
+
 <div th:replace = "fragments :: navigation"></div>
 <p>Here are the coding events in your area. If you know of others, feel free to add the event to the list.</p>
 <hr>
@@ -13,28 +13,12 @@
 <table th:if="${events}" class="table table-striped">
     <thead>
     <tr>
-        <th>Event ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Event Type</th>
-        <th>Location</th>
-        <th>Date</th>
-        <th>Must Register?</th>
-        <th># Attending</th>
-        <th>Contact Email</th>
+        <th>Event Name</th>
         <!-- <th>Edit Event</th>     **Took out Edit function for now -->
     </tr>
     </thead>
     <tr th:each="event : ${events}">
-        <td th:text="${event.id}">Default ID yo</td>
-        <td th:text="${event.name}">Default list thingy</td>
-        <td th:text="${event.eventDetails.description}">Default description</td>
-        <td th:text="${event.eventCategory}">Default category</td>
-        <td th:text="${event.eventDetails.location}">Default location</td>
-        <td th:text="${event.eventDetails.eventDate}">Default date</td>
-        <td th:text="${event.eventDetails.regRequired}">Default reg</td>
-        <td th:text="${event.eventDetails.numAttend}">Default attend</td>
-        <td th:text="${event.eventDetails.contactEmail}"></td>
+        <td><a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}">Default list thingy</a></td>
         <!-- <td>
             <a th:href="@{/events/edit/{uid}(uid=${event.uid})}">Edit</a>
         </td> -->
@@ -43,7 +27,3 @@
 
 </body>
 </html>
-
-<!--
-
--->
