@@ -30,7 +30,7 @@ public class TagController {
     @GetMapping("create")
     public String displayCreateTagForm(Model model) {
         model.addAttribute("title", "Create New Tag");
-        model.addAttribute(new Tag());
+        model.addAttribute("tag", new Tag());
         return "tags/create";
     }
 
