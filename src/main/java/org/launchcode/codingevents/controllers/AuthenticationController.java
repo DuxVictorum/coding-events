@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,14 +44,14 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register New User");
         return "register";
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request, Model model) {
         if (errors.hasErrors()) {
@@ -81,14 +80,14 @@ public class AuthenticationController {
         return "redirect:";
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String displayLoginForm(Model model) {
         model.addAttribute("title", "Log In");
         model.addAttribute(new LoginFormDTO());
         return "login";
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors errors,
                                    HttpServletRequest request, Model model) {
         if (errors.hasErrors()) {
@@ -115,7 +114,7 @@ public class AuthenticationController {
         return "redirect:";
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "redirect:/login";
